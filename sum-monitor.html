@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>태양광 센서 모니터링</title>
+
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/monitor.css">
+    <link rel="stylesheet" href="./css/card.css">
+    <link rel="stylesheet" href="./css/chart.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/chart.js" defer></script>
+</head>
+
+<style>
+    :root {
+        --wh: #fafafa;
+
+        --text: #222;
+        --sub_text: #666;
+        --mute: #ddd;
+
+        --side_back: #DDE8FF;
+
+        --error: #FF2F2F;
+        --warn: #FFCC00;
+        --okay: #34C759;
+
+        --type1: #FF6B5A;
+        --side_1: #FFC4BD;
+
+        --type2: #4EA8FF;
+        --side_3: #B8DCFF;
+
+        --type3: #FFC845;
+        --side_3: #FFE9B5;
+
+        --type4: #8B6BFF;
+        --side_4: #D1C4FF;
+
+        --type5: #2EC9A8;
+        --side_5: #ABE9DC;
+    }
+</style>
+
+<body>
+    <div class="wrap">
+        <header>
+            <div class="title">
+                <h3>태양광 단지센서 모니터링 시스템</h3>
+                <span>Sensor Monitoring System</span>
+            </div>
+
+            <!-- <div class="today_state">
+                <div class="tem">
+                    <img src="./images/icon/temperature.svg" alt="tem">
+                    <span>온도 : 18°C</span>
+                </div>
+
+                <div class="rain">
+                    <img src="./images/icon/rain.svg" alt="rain">
+                    <span>강수량 : 18mm</span>
+                </div>
+
+                <div class="hum">
+                    <img src="./images/icon/humidity.svg" alt="hum">
+                    <span>습도 : 18%</span>
+                </div>
+
+                <div class="wind">
+                    <img src="./images/icon/Wind.svg" alt="wind">
+                    <span>풍속 : 2.7m/s</span>
+                </div>
+            </div> -->
+        </header>
+
+        <div class="contain">
+            <div class="sun">
+                <h3>일사센서</h3>
+                <div class="sun_sensor_wrap">
+                    <div class="card num_1">
+                        <div class="card_header">
+                            <span>수평면 일사량</span>
+                            <div class="now_state error"></div>
+                        </div>
+
+                        <!-- 희원 1230 -->
+                        <div class="card_content">
+                            <div>
+                                <p>순간 일사량</p>
+                                <div class="text">
+                                    <h1>819.6</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div>
+                                <p>오늘 일사량</p>
+                                <div class="text">
+                                    <h1>153,153.5</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <!-- <div class="graph">
+                                <svg viewBox="0 0 280 160">
+                                    <path class="gauge-bg" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <path class="gauge-fill" id="gaugeFill" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <circle class="gauge_dot" id="gaugeDot" cx="30" cy="140" r="12" />
+                                </svg>
+
+                                <img class="needle" id="needle" src="./images/icon/Vector.svg" alt="needle" />
+                            </div> -->
+                            <!-- <div class="m_graph">
+                                <div class="m_graph_wrapper">
+                                    <div class="m_graph_fill" style="width: 65%;">
+                                        <div class="m_graph_value" style="right: 0;">45</div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="card num_2">
+                        <div class="card_header">
+                            <!-- 희원 0108 -->
+                            <span>경사면 일사랑 <span>(-88도)</span></span>
+                            <div class="now_state warn"></div>
+                        </div>
+
+                        <!-- 희원 1230 -->
+                        <div class="card_content">
+                            <div>
+                                <p>순간 일사량</p>
+                                <div class="text">
+                                    <h1>819.6</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div>
+                                <p>오늘 일사량</p>
+                                <div class="text">
+                                    <h1>153,153.5</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <!-- <div class="graph">
+                                <svg viewBox="0 0 280 160">
+                                    <path class="gauge-bg" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <path class="gauge-fill" id="gaugeFill" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <circle class="gauge_dot" id="gaugeDot" cx="30" cy="140" r="12" />
+                                </svg>
+
+                                <img class="needle" id="needle" src="./images/icon/Vector.svg" alt="needle" />
+                            </div> -->
+                            <!-- <div class="m_graph">
+                                <div class="m_graph_wrapper">
+                                    <div class="m_graph_fill" style="width: 65%;">
+                                        <div class="m_graph_value" style="right: 0;">45</div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="card num_3">
+                        <div class="card_header">
+                            <!-- 희원 0108 -->
+                            <span>경사면 일사랑 <span>(-113도)</span></span>
+                            <div class="now_state okay"></div>
+                        </div>
+
+                        <!-- 희원 1230 -->
+                        <div class="card_content">
+                            <div>
+                                <p>순간 일사량</p>
+                                <div class="text">
+                                    <h1>819.6</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div>
+                                <p>오늘 일사량</p>
+                                <div class="text">
+                                    <h1>153,153.5</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <!-- <div class="graph">
+                                <svg viewBox="0 0 280 160">
+                                    <path class="gauge-bg" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <path class="gauge-fill" id="gaugeFill" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <circle class="gauge_dot" id="gaugeDot" cx="30" cy="140" r="12" />
+                                </svg>
+
+                                <img class="needle" id="needle" src="./images/icon/Vector.svg" alt="needle" />
+                            </div> -->
+                            <!-- <div class="m_graph">
+                                <div class="m_graph_wrapper">
+                                    <div class="m_graph_fill" style="width: 65%;">
+                                        <div class="m_graph_value" style="right: 0;">45</div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="card num_4">
+                        <div class="card_header">
+                            <!-- 희원 0108 -->
+                            <span>경사면 일사량 <span>(92도)</span></span>
+                            <div class="now_state okay"></div>
+                        </div>
+
+                        <!-- 희원 1230 -->
+                        <div class="card_content">
+                            <div>
+                                <p>순간 일사량</p>
+                                <div class="text">
+                                    <h1>819.6</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div>
+                                <p>오늘 일사량</p>
+                                <div class="text">
+                                    <h1>153,153.5</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <!-- <div class="graph">
+                                <svg viewBox="0 0 280 160">
+                                    <path class="gauge-bg" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <path class="gauge-fill" id="gaugeFill" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <circle class="gauge_dot" id="gaugeDot" cx="30" cy="140" r="12" />
+                                </svg>
+
+                                <img class="needle" id="needle" src="./images/icon/Vector.svg" alt="needle" />
+                            </div> -->
+                            <!-- <div class="m_graph">
+                                <div class="m_graph_wrapper">
+                                    <div class="m_graph_fill" style="width: 65%;">
+                                        <div class="m_graph_value" style="right: 0;">45</div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <div class="card num_5">
+                        <div class="card_header">
+                            <!-- 희원 0108 -->
+                            <span>경사면 일사량 <span>(77도)</span></span>
+                            <div class="now_state error"></div>
+                        </div>
+
+                        <!-- 희원 1230 -->
+                        <div class="card_content">
+                            <div>
+                                <p>순간 일사량</p>
+                                <div class="text">
+                                    <h1>819.6</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+
+                            <div>
+                                <p>오늘 일사량</p>
+                                <div class="text">
+                                    <h1>153,153.5</h1>
+                                    <span>W/m²</span>
+                                </div>
+                                <!-- <div class="m_graph">
+                                    <div class="m_graph_wrapper">
+                                        <div class="m_graph_fill" style="width: 65%;">
+                                            <div class="m_graph_value" style="right: 0;">45</div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <!-- <div class="graph">
+                                <svg viewBox="0 0 280 160">
+                                    <path class="gauge-bg" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <path class="gauge-fill" id="gaugeFill" d="M 30 140 A 110 110 0 0 1 250 140" />
+
+                                    <circle class="gauge_dot" id="gaugeDot" cx="30" cy="140" r="12" />
+                                </svg>
+
+                                <img class="needle" id="needle" src="./images/icon/Vector.svg" alt="needle" />
+                            </div> -->
+                            <!-- <div class="m_graph">
+                                <div class="m_graph_wrapper">
+                                    <div class="m_graph_fill" style="width: 65%;">
+                                        <div class="m_graph_value" style="right: 0;">45</div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ect">
+                <h3>환경 센서</h3>
+                <div class="ect_wrap">
+                    <div class="wind_wrap">
+                        <!-- 희원 1230 -->
+                        <div class="card" style="width: 100%;">
+                            <div class="card_header">
+                                <div>
+                                    <img src="./images/ect_icon/Wind.svg" alt="풍속">
+                                    <span>풍속</span>
+                                </div>
+                                <div class="now_state okay"></div>
+                            </div>
+
+                            <div class="card_content">
+                                <div class="text">
+                                    <h1>819.6</h1>
+                                    <span>m/s</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div class="card">
+                            <div class="card_header">
+                                <div>
+                                    <img src="./images/ect_icon/direction.svg" alt="풍향">
+                                    <span>풍향</span>
+                                </div>
+                                <div class="now_state okay"></div>
+                            </div>
+
+                            <div class="card_content">
+                                <div class="text" style="gap: 10px;">
+                                    <h1>76°</h1>
+                                    <span style="margin: 0; color: var(--sub_text);">남동풍</span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+
+                    <div class="tem_hum">
+                        <div class="card">
+                            <div class="card_header">
+                                <div>
+                                    <img src="./images/ect_icon/Thermometer.svg" alt="온도">
+                                    <span>온도</span>
+                                </div>
+                                <div class="now_state okay"></div>
+                            </div>
+
+                            <div class="card_content">
+                                <div class="text" >
+                                    <h1>-18.0</h1>
+                                    <!-- 희원 1230 -->
+                                    <span style="margin: 0px; margin-bottom: 20px;">°C</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card_header">
+                                <div>
+                                    <img src="./images/ect_icon/Humidity.svg" alt="습도">
+                                    <span>습도</span>
+                                </div>
+                                <div class="now_state okay"></div>
+                            </div>
+
+                            <div class="card_content">
+                                <div class="text">
+                                    <h1>18.0</h1>
+                                    <span>%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rain_snow">
+                        <div class="card">
+                            <div class="card_header">
+                                <div>
+                                    <img src="./images/ect_icon/rain.svg" alt="강수량">
+                                    <span>강수량</span>
+                                </div>
+                                <div class="now_state okay"></div>
+                            </div>
+
+                            <div class="card_content">
+                                <div>
+                                    <p>어제 강수량</p>
+                                    <div class="text">
+                                        <h1>819.6</h1>
+                                        <span>m/s</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p>오늘 강수량</p>
+                                    <div class="text">
+                                        <h1>819.6</h1>
+                                        <span>m/s</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card_header">
+                                <div>
+                                    <img src="./images/ect_icon/Snow.svg" alt="적설량">
+                                    <span>적설량</span>
+                                </div>
+                                <div class="now_state okay"></div>
+                            </div>
+
+                            <div class="card_content">
+                                <div>
+                                    <p>어제 적설량</p>
+                                    <div class="text">
+                                        <h1>819.6</h1>
+                                        <span>m/s</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p>오늘 적설량</p>
+                                    <div class="text">
+                                        <h1>819.6</h1>
+                                        <span>m/s</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ect_sun" style="display: none;">
+                        <div class="card">
+                            <div class="card_header">
+                                <div>
+                                    <img src="./images/ect_icon/Snow.svg" alt="적설량">
+                                    <span>일사 정보</span>
+                                </div>
+                                <div class="now_state okay"></div>
+                            </div>
+
+                            <div class="card_content">
+                                <div>
+                                    <p>구역별 일사 평균</p>
+                                    <div class="text">
+                                        <h1>15.3</h1>
+                                        <span>W/m²</span>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p>구역 최고 일사량</p>
+                                    <div class="text">
+                                        <h1>819.6</h1>
+                                        <span>W/m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

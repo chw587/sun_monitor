@@ -1,0 +1,190 @@
+:root {
+    --wh: #fafafa;
+
+    --text: #222;
+    --sub_text: #666;
+    --mute: #ddd;
+
+    --side_back: #DDE8FF;
+
+    --error: #FF2F2F;
+    --warn: #FFCC00;
+    --okay: #34C759;
+
+    --type1: #FF6B5A;
+    --side_1: #FFC4BD;
+
+    --type2: #4EA8FF;
+    --side_3: #B8DCFF;
+
+    --type3: #FFC845;
+    --side_3: #FFE9B5;
+
+    --type4: #8B6BFF;
+    --side_4: #D1C4FF;
+
+    --type5: #2EC9A8;
+    --side_5: #ABE9DC;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+.wrap {
+    width: 100%;
+    height: 100%;
+}
+
+/* -----header----- */
+header {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 40px;
+    background-color: var(--wh);
+    border-bottom: 2px solid var(--mute);
+    box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.25);
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.today_state,
+.today_state>div {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.today_state {
+    height: 30px;
+    padding: 0 15px;
+    border-radius: 20px;
+    background: var(--side_back);
+}
+
+.today_state>div {
+    gap: 5px;
+    padding: 0 10px;
+    border-right: 1px solid var(--text);
+}
+
+.today_state>div:last-child {
+    border: none;
+}
+
+.today_state>div>img,
+.card .card_header img {
+    width: 20px;
+}
+
+
+/* -----contain----- */
+.contain {
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 60px);
+    /* 희원 0106 */
+    padding: 40px;
+    gap: 20px;
+}
+
+
+.contain .sun,
+.contain .ect {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 태양광 센서 */
+.contain .sun {
+    width: 65%;
+    /* 희원 0106 */
+    /* margin: 40px; */
+}
+
+.sun_sensor_wrap {
+    /* 희원 1230 */
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: end;
+    gap: 20px;
+    /* 희원 0108 */
+    height: 95%;
+
+    position: relative;
+    width: 100%;
+
+    
+}
+
+/* 기타 센서 */
+.contain .ect {
+    width: 35%;
+    /* 희원 0106 */
+    /* margin: 40px 40px 40px 0; */
+}
+
+.ect_wrap {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wind_wrap,
+.tem_hum,
+.rain_snow {
+    /* 희원 1230 */
+    height: 28%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 희원 1230 */
+.rain_snow {
+    height: 40%;
+}
+
+.rain_snow .card_content {
+    flex-direction: column;
+}
+
+
+
+.wind_wrap .card,
+.tem_hum .card,
+.rain_snow .card {
+    width: 48%;
+    background: var(--wh);
+}
+
+/* 희원 1230 */
+/* .ect_wrap .rain_snow .card_content>div, */
+.ect_sun .card .card_content>div,
+.sun_sensor_wrap .card .card_content>div {
+    /* 희원 0106 */
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.ect_wrap .rain_snow .card_content>div p,
+.ect_sun .card .card_content>div p,
+/* 희원 1230 */
+.sun_sensor_wrap .card .card_content>div p {
+    font-size: 14px;
+    color: var(--sub_text)
+}
+
+
+.ect_sun .card {
+    width: 100%;
+}

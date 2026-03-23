@@ -1,0 +1,350 @@
+:root {
+    --wh: #fafafa;
+
+    --text: #222;
+    --mute: #ddd;
+
+    --side_back: #DDE8FF;
+
+    --error: #FF2F2F;
+    --warn: #FFCC00;
+    --okay: #34C759;
+
+    --type1: #FF6B5A;
+    --side_1: #FFC4BD;
+
+    --type2: #4EA8FF;
+    --side_2: #B8DCFF;
+
+    --type3: #FFC845;
+    --side_3: #FFE9B5;
+
+    --type4: #8B6BFF;
+    --side_4: #D1C4FF;
+
+    --type5: #2EC9A8;
+    --side_5: #ABE9DC;
+
+    /* ====== TYPO(자동 스케일) ======
+     1) 전체 기본 폰트는 html font-size clamp로 스케일
+     2) 컴포넌트별 텍스트는 rem + clamp 조합
+  */
+    --fs-header: clamp(1.2rem, 0.7vw, 1rem);
+    --fs-body: clamp(0.8rem, 0.6vw, 0.95rem);
+
+    /* 카드 숫자(기본) */
+    --fs-value: clamp(1.6rem, 2.8vw, 3rem);
+
+    /* 바람 카드 숫자: vw + vh 혼합 (가로/세로 변화 모두 반영) */
+    --fs-value-wind: clamp(1.8rem, calc(2.2vw + 1.1vh), 3.6rem);
+
+    /* 단위(span) */
+    --fs-unit: clamp(0.85rem, calc(0.6vw + 0.2vh), 1.05rem);
+}
+
+/* 전체 기본 폰트가 화면 크기에 따라 자동 조절 */
+html {
+    font-size: clamp(13px, 0.9vw, 16px);
+}
+
+body {
+    color: var(--text);
+}
+
+/* --태양광 센서 카드-- */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--wh);
+    padding: 10px;
+    border-radius: 12px;
+
+    container-type: inline-size;
+}
+
+.sun_sensor_wrap .card {
+    width: 48%;
+    height: 31%;
+}
+
+/* card_header */
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.05);
+    box-shadow: 0 4px 3px -5px rgb(0, 0, 0, 0.25);
+
+    /* 헤더 텍스트 자동 스케일 */
+    font-size: var(--fs-header);
+}
+
+.card_header>div {
+    align-items: center;
+}
+
+.card_header .now_state {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+}
+
+.card .card_header>div {
+    display: flex;
+    align-content: center;
+    gap: 5px;
+}
+
+/* card_content */
+.card_content {
+    display: flex;
+    height: 100%;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.card_content .text {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    align-items: center;
+}
+
+/* ====== 핵심: 숫자(h1) 자동 스케일 ====== */
+.card_content .text h1 {
+    font-size: var(--fs-value);
+    line-height: 1;
+}
+
+/* 단위(span)도 자동 스케일 */
+.card_content .text span {
+    font-size: var(--fs-unit);
+    margin-top: 0.25em;
+}
+
+.ect_sun .card .card_content {
+    flex-direction: initial;
+    justify-content: center;
+}
+
+.ect .card .card_content {
+    padding: 10px;
+    gap: 10px;
+}
+
+/* sensor-state */
+.card .card_header .now_state.error {
+    background: var(--error);
+    box-shadow: 0 0 10px 3px var(--error);
+}
+
+.card .card_header .now_state.warn {
+    background: var(--warn);
+    box-shadow: 0 0 10px 3px var(--warn);
+}
+
+.card .card_header .now_state.okay {
+    background: var(--okay);
+    box-shadow: 0 0 10px 3px var(--okay);
+}
+
+/* 바람 카드: gap 조정 */
+.ect_wrap>div .card {
+    gap: 0;
+}
+
+/* 바람 카드 숫자는 별도 자동 스케일 */
+.wind_wrap .card_content .text h1 {
+    font-size: var(--fs-value-wind);
+}
+
+/* 그래프 */
+.graph {
+    width: 100%;
+    height: 200px;
+}
+
+
+
+
+/* ====== (권장) 카드 폭 기준으로 더 정확히 자동 스케일 ======
+   지원 브라우저에서는 vw 대신 카드 폭(cqi) 기반으로 더 자연스럽게 변합니다.
+*/
+@supports (font-size: 1cqi) {
+    .card_content .text h1 {
+        font-size: clamp(1.6rem, 8cqi, 3rem);
+    }
+
+    /* 희원 0109 */
+    .ect_wrap .card .card_content .text h1 {
+        font-size: clamp(1.6rem, 14cqi, 3rem);
+    }
+
+    /* wind는 일반 h1보다 우선 적용 + 최대값 3.6rem 유지 */
+    .wind_wrap .card_content .text h1 {
+        font-size: clamp(1.8rem, calc(10cqi + 0.8vh), 3.2rem);
+    }
+
+    .card_header {
+        font-size: clamp(1rem, 3.2cqi, 1rem);
+    }
+
+    .card_content .text span {
+        font-size: clamp(0.85rem, calc(3.0cqi + 0.2vh), 1.05rem);
+    }
+}
+
+/* -----반응형(레이아웃만 유지)----- */
+@media screen and (max-width: 1650px) {
+    .contain .sun {
+        width: 70%;
+    }
+
+    .contain .ect {
+        width: 30%;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .contain {
+        padding: 35px;
+    }
+}
+
+@media screen and (max-width: 1420px) {
+    .contain {
+        padding: 30px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .contain {
+        padding: 25px;
+        gap: 18px;
+    }
+
+    .sun_sensor_wrap {
+        row-gap: 20px;
+        column-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .contain {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .sun_sensor_wrap .card {
+        width: 49%;
+    }
+
+    .sun_sensor_wrap {
+        row-gap: 20px;
+        column-gap: 10px;
+    }
+}
+
+@media screen and (max-width: 1160px) {
+    .contain {
+        gap: 10px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+    .wrap {
+        height: 100%;
+    }
+
+    .contain {
+        flex-direction: column;
+    }
+
+    .contain .sun,
+    .contain .ect {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+
+    .sun_sensor_wrap {
+        height: 70%;
+        justify-content: start;
+        row-gap: 10px;
+        flex-direction: initial;
+    }
+
+    .ect_wrap {
+        gap: 10px;
+    }
+
+    .sun_sensor_wrap .card {
+        min-height: 160px;
+    }
+}
+
+@media screen and (max-width: 570px) {
+    .card {
+        gap: 0;
+    }
+
+    .card_content {
+        flex-direction: column;
+    }
+
+    .sun_sensor_wrap {
+        column-gap: 8px;
+    }
+}
+
+@media screen and (max-width : 440px) {
+    .sun_sensor_wrap .card {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width : 400px) {
+
+    /* 텍스트 줄바꿈 */
+    .card_header>span {
+        display: inline-flex;
+        flex-direction: column;
+    }
+}
+
+
+/* 높이 반응형 */
+@media screen and (max-height: 720px) {
+    .sun_sensor_wrap {
+        row-gap: 10px;
+    }
+
+    .sun_sensor_wrap .card {
+        height: 32%;
+        gap: 10px;
+    }
+
+    .wind_wrap .card,
+    .tem_hum .card,
+    .rain_snow .card {
+        gap: 10px;
+    }
+}
+
+@media screen and (max-height: 625px) {
+    .sun_sensor_wrap {
+        row-gap: 8px;
+    }
+
+    .sun_sensor_wrap .card {
+        gap: 5px;
+    }
+
+    .wind_wrap .card,
+    .tem_hum .card,
+    .rain_snow .card {
+        gap: 5px;
+    }
+}

@@ -1,0 +1,202 @@
+:root {
+    --wh: #fafafa;
+
+    --text: #222;
+    --sub_text: #666;
+    --mute: #ddd;
+
+    --side_back: #DDE8FF;
+
+    --error: #FF2F2F;
+    --warn: #FFCC00;
+    --okay: #34C759;
+
+    --type1: #FF6B5A;
+    --side_1: #FFC4BD;
+
+    --type2: #4EA8FF;
+    --side_2: #B8DCFF;
+
+    --type3: #FFC845;
+    --side_3: #FFE9B5;
+
+    --type4: #8B6BFF;
+    --side_4: #D1C4FF;
+
+    --type5: #2EC9A8;
+    --side_5: #ABE9DC;
+}
+
+.graph {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.graph svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.gauge-bg {
+    fill: none;
+    stroke-width: 28;
+    stroke-linecap: round;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: url(#gaugeGradient);
+    stroke-width: 28;
+    stroke-linecap: round;
+    stroke-dasharray: 0 314;
+    transition: stroke-dasharray 0.5s ease;
+}
+
+.gauge_dot {
+    transition: transform 0.5s ease;
+    transform-origin: 140px 140px;
+}
+
+.needle {
+    position: absolute;
+    width: 30px;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%) rotate(-90deg);
+    transform-origin: 50% 100%;
+    transition: transform 0.5s ease;
+    pointer-events: none;
+}
+
+/* num_1 */
+.num_1 .gauge-bg {
+    stroke: var(--side_1);
+}
+
+.num_1 .gauge_dot {
+    fill: var(--type1);
+    filter: drop-shadow(0 2px 4px rgba(255, 102, 102, 0.4));
+}
+
+.num_1 .m_graph_wrapper {
+    background: var(--side_1);
+}
+
+.num_1 .m_graph_fill {
+    background: var(--type1);
+}
+
+/* num_2 */
+.num_2 .gauge-bg {
+    stroke: var(--side_2);
+}
+
+.num_2 .gauge_dot {
+    fill: var(--type2);
+    filter: drop-shadow(0 2px 4px rgba(99, 141, 255, 0.4));
+}
+
+.num_2 .m_graph_wrapper {
+    background: var(--side_2);
+}
+
+.num_2 .m_graph_fill {
+    background: var(--type2);
+}
+
+/* num_3 */
+.num_3 .gauge-bg {
+    stroke: var(--side_3);
+}
+
+.num_3 .gauge_dot {
+    fill: var(--type3);
+    filter: drop-shadow(0 2px 4px rgba(255, 195, 67, 0.4));
+}
+
+.num_3 .m_graph_wrapper {
+    background: var(--side_3);
+}
+
+.num_3 .m_graph_fill {
+    background: var(--type3);
+}
+
+/* num_4 */
+.num_4 .gauge-bg {
+    stroke: var(--side_4);
+}
+
+.num_4 .gauge_dot {
+    fill: var(--type4);
+    filter: drop-shadow(0 2px 4px rgba(187, 39, 255, 0.4));
+}
+
+.num_4 .m_graph_wrapper {
+    background: var(--side_4);
+}
+
+.num_4 .m_graph_fill {
+    background: var(--type4);
+}
+
+/* num_5 */
+.num_5 .gauge-bg {
+    stroke: var(--side_5);
+}
+
+.num_5 .gauge_dot {
+    fill: var(--type5);
+    filter: drop-shadow(0 2px 4px rgba(0, 117, 72, 0.4));
+}
+
+.num_5 .m_graph_wrapper {
+    background: var(--side_5);
+}
+
+.num_5 .m_graph_fill {
+    background: var(--type5);
+}
+
+
+/* 모바일 차트 */
+.m_graph {
+    /* 희원 1230 */
+    width: 80%;
+    /* display: none !important; */
+    margin: 20px 0;
+}
+
+.m_graph_wrapper {
+    position: relative;
+    width: 100%;
+    height: 32px;
+    background: linear-gradient(to right, #E8D4FF 0%, #D4B8FF 100%);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.m_graph_fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: linear-gradient(to right, #7B5FFF 0%, #6B4FEF 100%);
+    border-radius: 16px;
+    transition: width 0.5s ease;
+}
+
+.m_graph_value {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    z-index: 2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    padding-right: 12px;
+}
